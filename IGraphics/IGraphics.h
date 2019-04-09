@@ -42,6 +42,10 @@
 #include "IGraphicsPopupMenu.h"
 #include "IGraphicsEditorDelegate.h"
 
+#ifdef IGRAPHICS_IMGUI
+#include "IGraphicsImGui.h"
+#endif
+
 #include "heapbuf.h"
 #include <stack>
 #include <memory>
@@ -1431,4 +1435,8 @@ protected:
   friend class ICornerResizerControl;
   
   std::stack<ILayer*> mLayers;
+  
+#ifdef IGRAPHICS_IMGUI
+  std::unique_ptr<ImGuiRenderer> mImGuiRenderer;
+#endif
 };

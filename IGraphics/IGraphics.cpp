@@ -742,6 +742,17 @@ void IGraphics::OnMouseDown(float x, float y, const IMouseMod& mod)
 {
   Trace("IGraphics::OnMouseDown", __LINE__, "x:%0.2f, y:%0.2f, mod:LRSCA: %i%i%i%i%i",
         x, y, mod.L, mod.R, mod.S, mod.C, mod.A);
+  
+#ifdef IGRAPHICS_IMGUI
+  if(mImGuiRenderer)
+  {
+    if(mImGuiRenderer.get()->OnMouseDown(x, y, mod))
+    {
+      ReleaseMouseCapture();
+      return;
+    }
+  }
+#endif
 
   IControl* pControl = GetMouseControl(x, y, true);
   
@@ -794,6 +805,17 @@ void IGraphics::OnMouseUp(float x, float y, const IMouseMod& mod)
 {
   Trace("IGraphics::OnMouseUp", __LINE__, "x:%0.2f, y:%0.2f, mod:LRSCA: %i%i%i%i%i",
         x, y, mod.L, mod.R, mod.S, mod.C, mod.A);
+  
+#ifdef IGRAPHICS_IMGUI
+  if(mImGuiRenderer)
+  {
+    if(mImGuiRenderer.get()->OnMouseUp(x, y, mod))
+    {
+      ReleaseMouseCapture();
+      return;
+    }
+  }
+#endif
    
   if (mMouseCapture)
   {
@@ -823,6 +845,11 @@ bool IGraphics::OnMouseOver(float x, float y, const IMouseMod& mod)
   Trace("IGraphics::OnMouseOver", __LINE__, "x:%0.2f, y:%0.2f, mod:LRSCA: %i%i%i%i%i",
         x, y, mod.L, mod.R, mod.S, mod.C, mod.A);
 
+#ifdef IGRAPHICS_IMGUI
+  if(mImGuiRenderer)
+    mImGuiRenderer.get()->OnMouseMove(x, y, mod);
+#endif
+  
   // N.B. GetMouseControl handles which controls can receive mouseovers
     
   IControl* pControl = GetMouseControl(x, y, false, true);
@@ -866,6 +893,10 @@ void IGraphics::OnMouseDrag(float x, float y, float dX, float dY, const IMouseMo
   {
     mMouseCapture->OnMouseDrag(x, y, dX, dY, mod);
   }
+#ifdef IGRAPHICS_IMGUI
+  else if(mImGuiRenderer)
+    mImGuiRenderer.get()->OnMouseMove(x, y, mod);
+#endif
 }
 
 bool IGraphics::OnMouseDblClick(float x, float y, const IMouseMod& mod)
@@ -893,6 +924,14 @@ bool IGraphics::OnMouseDblClick(float x, float y, const IMouseMod& mod)
 
 void IGraphics::OnMouseWheel(float x, float y, const IMouseMod& mod, float d)
 {
+#ifdef IGRAPHICS_IMGUI
+    if(mImGuiRenderer)
+    {
+      mImGuiRenderer.get()->OnMouseWheel(x, y, mod, d);
+      return;
+    }
+#endif
+  
   IControl* pControl = GetMouseControl(x, y, false);
   if (pControl) pControl->OnMouseWheel(x, y, mod, d);
 }
@@ -904,6 +943,16 @@ bool IGraphics::OnKeyDown(float x, float y, const IKeyPress& key)
 
   bool handled = false;
 
+#ifdef IGRAPHICS_IMGUI
+  if(mImGuiRenderer)
+  {
+    handled = mImGuiRenderer.get()->OnKeyDown(x, y, key);
+    
+    if(handled)
+      return true;
+  }
+#endif
+  
   IControl* pControl = GetMouseControl(x, y, false);
   
   if (pControl && pControl != GetControl(0))

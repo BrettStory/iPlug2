@@ -24,10 +24,8 @@
     #endif
   #elif defined OS_IOS
 //    #if defined IGRAPHICS_GLES2
-//      #include <OpenGLES/ES2/gl.h>
 //      #define NANOVG_GLES2_IMPLEMENTATION
 //    #elif defined IGRAPHICS_GLES3
-//      #include <OpenGLES/ES3/gl.h>
 //      #define NANOVG_GLES2_IMPLEMENTATION
 //    #else
 //      #error Define either IGRAPHICS_GLES2 or IGRAPHICS_GLES3 when using IGRAPHICS_GL and IGRAPHICS_NANOVG with OS_IOS
@@ -406,7 +404,7 @@ void IGraphicsNanoVG::OnViewInitialized(void* pContext)
 #endif
 
 #ifdef IGRAPHICS_IMGUI
-  mImGuiRenderer = new ImGuiRenderer(pContext, this);
+  mImGuiRenderer.reset(new ImGuiRenderer(this));
 #endif
 
   if (mVG == nullptr)
@@ -416,8 +414,7 @@ void IGraphicsNanoVG::OnViewInitialized(void* pContext)
 void IGraphicsNanoVG::OnViewDestroyed()
 {
 #ifdef IGRAPHICS_IMGUI
-  if(mImGuiRenderer)
-    DELETE_NULL(mImGuiRenderer);
+  mImGuiRenderer.reset(nullptr);
 #endif
   // need to remove all the controls to free framebuffers, before deleting context
   RemoveAllControls();

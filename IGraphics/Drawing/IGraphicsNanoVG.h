@@ -28,10 +28,6 @@
   #error you must define either IGRAPHICS_GL2, IGRAPHICS_GLES2 etc or IGRAPHICS_METAL when using IGRAPHICS_NANOVG
 #endif
 
-#ifdef IGRAPHICS_IMGUI
-  #include "IGraphicsImGui.h"
-#endif
-
 #if defined IGRAPHICS_GL2
   #define NANOVG_GL2 1
   #define nvgCreateContext(flags) nvgCreateGL2(flags)
@@ -174,10 +170,6 @@ private:
   NVGcontext* mVG = nullptr;
   NVGframebuffer* mMainFrameBuffer = nullptr;
   
-#ifdef IGRAPHICS_IMGUI
-  ImGuiRenderer* mImGuiRenderer = nullptr;
-#endif
-    
 #if defined OS_WIN
   HGLRC mHGLRC = nullptr;
 #endif
