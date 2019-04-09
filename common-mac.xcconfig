@@ -68,7 +68,7 @@ EXTRAS_PATH = $(IPLUG_PATH)/Extras
 JSON11_PATH = $(DEPS_PATH)/Extras/json11
 YOGA_PATH = $(DEPS_PATH)/IGraphics/yoga/yoga
 PUGL_PATH = $(DEPS_PATH)/Extras/pugl
-IMGUI_PATH = $(DEPS_PATH)/Extras/imgui
+IMGUI_PATH = $(DEPS_PATH)/IGraphics/imgui
 
 //faust is linked as a dynamic library
 FAUST_LIB_PATHS = $(BUILT_LIBS_LIB_PATH)
