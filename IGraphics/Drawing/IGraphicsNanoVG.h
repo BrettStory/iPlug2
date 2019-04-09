@@ -65,6 +65,13 @@
   typedef MNVGframebuffer NVGframebuffer;
 #endif
 
+//FIXME: for some reason the render to offscreen frame buffer approach, causes strobing with macOS GL, so set everything dirty...
+#if defined IGRAPHICS_GL && defined IGRAPHICS_NANOVG
+  #define RENDER_TO_FBO 0
+#else
+  #define RENDER_TO_FBO 1
+#endif
+
 void nvgReadPixels(NVGcontext* pContext, int image, int x, int y, int width, int height, void* pData);
 
 // Forward declaration
