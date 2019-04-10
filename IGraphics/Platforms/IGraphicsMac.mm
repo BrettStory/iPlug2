@@ -580,6 +580,18 @@ bool IGraphicsMac::GetTextFromClipboard(WDL_String& str)
   }
 }
 
+void* IGraphicsMac::GetCALayer()
+{
+  if(mView)
+  {
+    IGRAPHICS_VIEW* pView = (IGRAPHICS_VIEW*) mView;
+  
+    return pView.layer;
+  }
+  else
+    return nullptr;
+}
+
 //TODO: THIS IS TEMPORARY, TO EASE DEVELOPMENT
 #ifdef IGRAPHICS_AGG
   #include "IGraphicsAGG.cpp"

@@ -67,6 +67,8 @@ public:
   bool MeasureText(const IText& text, const char* str, IRECT& bounds) override;
 
   void ContextReady(void* pLayer);
+  
+  void* GetCALayer() override;
 
 protected:
   IPopupMenu* CreatePlatformPopupMenu(IPopupMenu& menu, const IRECT& bounds, IControl* pCaller) override;

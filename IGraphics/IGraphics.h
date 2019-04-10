@@ -821,6 +821,9 @@ public:
    * @return void pointer to an HDC or CGContext */
   void* GetPlatformContext() { return mPlatformContext; }
   
+  /** @return /todo */
+  virtual void* GetCALayer() { return nullptr; }
+  
   /** Convert an x, y position in the view to screen coordinates
    * @param x the x position to convert
    * @param y the y position to convert */
