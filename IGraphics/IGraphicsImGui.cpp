@@ -133,7 +133,7 @@ void ImGuiRenderer::Init()
 #if defined IGRAPHICS_GL2
   ImGui_ImplOpenGL2_Init();
 #elif defined IGRAPHICS_GL3
-  ImGui_ImplOpenGL3_Init()
+  ImGui_ImplOpenGL3_Init();
 #elif defined IGRAPHICS_METAL
   // see .mm
 #endif
@@ -144,7 +144,7 @@ void ImGuiRenderer::Destroy()
 #if defined IGRAPHICS_GL2
   ImGui_ImplOpenGL2_Shutdown();
 #elif defined IGRAPHICS_GL3
-  ImGui_ImplOpenGL3_Shutdown()
+  ImGui_ImplOpenGL3_Shutdown();
 #elif defined IGRAPHICS_METAL
   // see .mm
 #endif
@@ -171,12 +171,14 @@ void ImGuiRenderer::NewFrame()
 #include "imgui_draw.cpp"
 #include "imgui_demo.cpp"
 
-//#if defined IGRAPHICS_GL
-  #if defined IGRAPHICS_GL2
+#ifndef IGRAPHICS_METAL
+  #if defined IGRAPHICS_GLES2 || defined IGRAPHICS_GLES3
+    #error IGRAPHICS_GLES2/3 not yet supported
+  #elif defined IGRAPHICS_GL2
     #include "imgui_impl_opengl2.cpp"
   #elif defined IGRAPHICS_GL3
     #include "imgui_impl_opengl3.cpp"
   #endif
-//#endif
+#endif
 
 #endif //IGRAPHICS_IMGUI
