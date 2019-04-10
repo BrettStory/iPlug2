@@ -466,15 +466,11 @@ void IGraphicsNanoVG::BeginFrame()
   glDisable(GL_DEPTH_TEST);
   #endif
 #endif
-  
-#ifdef IGRAPHICS_IMGUI
-  mImGuiRenderer->BeginFrame();
-#endif
 
 #if RENDER_TO_FBO
   nvgBindFramebuffer(mMainFrameBuffer); // begin main frame buffer update
 #endif
-  
+
   nvgBeginFrame(mVG, WindowWidth(), WindowHeight(), GetScreenScale());
 }
 
@@ -500,7 +496,7 @@ void IGraphicsNanoVG::EndFrame()
   nvgEndFrame(mVG);
 
 #ifdef IGRAPHICS_IMGUI
-  mImGuiRenderer->EndFrame();
+  mImGuiRenderer->NewFrame();
 #endif
   
   mInDraw = false;

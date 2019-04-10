@@ -1,8 +1,16 @@
 #if defined IGRAPHICS_IMGUI
 
 #include "IPlugPlatform.h"
-#include "IGraphics_select.h"
 #include "IGraphicsImGui.h"
+#include "IGraphics_select.h"
+
+#if defined IGRAPHICS_GL2
+#include "imgui_impl_opengl2.h"
+#elif defined IGRAPHICS_GL3
+#include "imgui_impl_opengl3.h"
+#elif defined IGRAPHICS_METAL
+//see .mm
+#endif
 
 ImGuiRenderer::ImGuiRenderer(IGraphics* pGraphics)
 : mGraphics(pGraphics)
@@ -49,47 +57,30 @@ ImGuiRenderer::ImGuiRenderer(IGraphics* pGraphics)
   //    {
   //    };
   
-  
-  ImGui_Impl_Init();
+  Init();
 }
 
 ImGuiRenderer::~ImGuiRenderer()
 {
-  ImGui_Impl_Shutdown();
+  Destroy();
   ImGui::DestroyContext();
 }
 
-static int64_t g_Time = 0;
-static int64_t g_TicksPerSecond = 0;
-
-void ImGuiRenderer::BeginFrame()
-{  
-  ImGui_Impl_NewFrame();
-  
+void ImGuiRenderer::DoFrame()
+{
   ImGuiIO &io = ImGui::GetIO();
-  io.DisplaySize.x = mGraphics->Width() * mGraphics->GetDrawScale();
-  io.DisplaySize.y = mGraphics->Height() * mGraphics->GetDrawScale();
+  io.DisplaySize.x = std::round(mGraphics->Width() * mGraphics->GetDrawScale());
+  io.DisplaySize.y = std::round(mGraphics->Height() * mGraphics->GetDrawScale());
   int scale = mGraphics->GetScreenScale();
   io.DisplayFramebufferScale = ImVec2(scale, scale);
   io.DeltaTime = 1.f / mGraphics->FPS();
   
-//  if (g_Time == 0.0)
-//    g_Time = CFAbsoluteTimeGetCurrent();
-//  CFAbsoluteTime current_time = CFAbsoluteTimeGetCurrent();
-//  io.DeltaTime = current_time - g_Time;
-//  g_Time = current_time;
-//
   ImGui::NewFrame();
   
   if(mGraphics->GetIMGUIFunc())
     mGraphics->GetIMGUIFunc()(mGraphics);
   
   ImGui::Render();
-}
-
-void ImGuiRenderer::EndFrame()
-{  
-  ImGui_Impl_RenderDrawData();
 }
 
 bool ImGuiRenderer::OnMouseDown(float x, float y, const IMouseMod &mod)
@@ -123,6 +114,7 @@ bool ImGuiRenderer::OnMouseWheel(float x, float y, const IMouseMod &mod, float d
 void ImGuiRenderer::OnMouseMove(float x, float y, const IMouseMod &mod)
 {
   ImGuiIO &io = ImGui::GetIO();
+  
   io.MousePos = ImVec2(x * mGraphics->GetDrawScale(), y * mGraphics->GetDrawScale());
 }
 
@@ -134,6 +126,45 @@ bool ImGuiRenderer::OnKeyDown(float x, float y, const IKeyPress &key)
   
   return io.WantCaptureKeyboard;
 }
+
+#ifndef IGRAPHICS_METAL
+void ImGuiRenderer::Init()
+{
+#if defined IGRAPHICS_GL2
+  ImGui_ImplOpenGL2_Init();
+#elif defined IGRAPHICS_GL3
+  ImGui_ImplOpenGL3_Init()
+#elif defined IGRAPHICS_METAL
+  // see .mm
+#endif
+}
+
+void ImGuiRenderer::Destroy()
+{
+#if defined IGRAPHICS_GL2
+  ImGui_ImplOpenGL2_Shutdown();
+#elif defined IGRAPHICS_GL3
+  ImGui_ImplOpenGL3_Shutdown()
+#elif defined IGRAPHICS_METAL
+  // see .mm
+#endif
+}
+
+void ImGuiRenderer::NewFrame()
+{
+#if defined IGRAPHICS_GL2
+  ImGui_ImplOpenGL2_NewFrame();
+  this->DoFrame();
+  ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+#elif defined IGRAPHICS_GL3
+  ImGui_ImplOpenGL3_NewFrame();
+  this->DoFrame();
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+#elif defined IGRAPHICS_METAL
+  // see .mm
+#endif
+}
+#endif
 
 #include "imgui.cpp"
 #include "imgui_widgets.cpp"

@@ -806,17 +806,6 @@ void IGraphics::OnMouseUp(float x, float y, const IMouseMod& mod)
   Trace("IGraphics::OnMouseUp", __LINE__, "x:%0.2f, y:%0.2f, mod:LRSCA: %i%i%i%i%i",
         x, y, mod.L, mod.R, mod.S, mod.C, mod.A);
   
-#ifdef IGRAPHICS_IMGUI
-  if(mImGuiRenderer)
-  {
-    if(mImGuiRenderer.get()->OnMouseUp(x, y, mod))
-    {
-      ReleaseMouseCapture();
-      return;
-    }
-  }
-#endif
-   
   if (mMouseCapture)
   {
     int paramIdx = mMouseCapture->ParamIdx();
@@ -827,7 +816,7 @@ void IGraphics::OnMouseUp(float x, float y, const IMouseMod& mod)
     }
     ReleaseMouseCapture();
   }
-    
+
   if (mResizingInProcess)
   {
     mResizingInProcess = false;
@@ -838,20 +827,30 @@ void IGraphics::OnMouseUp(float x, float y, const IMouseMod& mod)
       SetAllControlsDirty();
     }
   }
+  
+#ifdef IGRAPHICS_IMGUI
+  if(mImGuiRenderer)
+  {
+    if(mImGuiRenderer.get()->OnMouseUp(x, y, mod))
+    {
+      ReleaseMouseCapture();
+      return;
+    }
+  }
+#endif
 }
 
 bool IGraphics::OnMouseOver(float x, float y, const IMouseMod& mod)
 {
   Trace("IGraphics::OnMouseOver", __LINE__, "x:%0.2f, y:%0.2f, mod:LRSCA: %i%i%i%i%i",
         x, y, mod.L, mod.R, mod.S, mod.C, mod.A);
-
+  
 #ifdef IGRAPHICS_IMGUI
   if(mImGuiRenderer)
     mImGuiRenderer.get()->OnMouseMove(x, y, mod);
 #endif
   
   // N.B. GetMouseControl handles which controls can receive mouseovers
-    
   IControl* pControl = GetMouseControl(x, y, false, true);
     
   if (pControl != mMouseOver)
