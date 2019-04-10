@@ -283,7 +283,6 @@
     <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsAGG.h" />
     <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsAGG_src.h" />
     <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsCairo.h" />
-    <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsImGui.h" />
     <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsLice.h" />
     <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsLice_src.h" />
     <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsNanoVG.h" />
@@ -291,6 +290,7 @@
     <ClInclude Include="..\..\..\IGraphics\IGraphics.h" />
     <ClInclude Include="..\..\..\IGraphics\IGraphicsConstants.h" />
     <ClInclude Include="..\..\..\IGraphics\IGraphicsEditorDelegate.h" />
+    <ClInclude Include="..\..\..\IGraphics\IGraphicsImGui.h" />
     <ClInclude Include="..\..\..\IGraphics\IGraphicsLiveEdit.h" />
     <ClInclude Include="..\..\..\IGraphics\IGraphicsPathBase.h" />
     <ClInclude Include="..\..\..\IGraphics\IGraphicsPopupMenu.h" />
@@ -357,7 +357,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\IGraphics\Drawing\IGraphicsImGui.cpp" />
     <ClCompile Include="..\..\..\IGraphics\Drawing\IGraphicsLice.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tracer|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tracer|x64'">true</ExcludedFromBuild>
@@ -385,6 +384,7 @@
     <ClCompile Include="..\..\..\IGraphics\IControl.cpp" />
     <ClCompile Include="..\..\..\IGraphics\IGraphics.cpp" />
     <ClCompile Include="..\..\..\IGraphics\IGraphicsEditorDelegate.cpp" />
+    <ClCompile Include="..\..\..\IGraphics\IGraphicsImGui.cpp" />
     <ClCompile Include="..\..\..\IGraphics\Platforms\IGraphicsWin.cpp" />
     <ClCompile Include="..\..\..\IPlug\APP\IPlugAPP.cpp" />
     <ClCompile Include="..\..\..\IPlug\APP\IPlugAPP_dialog.cpp" />

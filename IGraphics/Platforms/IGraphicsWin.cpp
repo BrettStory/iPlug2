@@ -79,8 +79,6 @@ void IGraphicsWin::CheckTabletInput(UINT msg)
   }
 }
 
-extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 // static
 LRESULT CALLBACK IGraphicsWin::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -103,11 +101,6 @@ LRESULT CALLBACK IGraphicsWin::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARA
   {
     return DefWindowProc(hWnd, msg, wParam, lParam);
   }
-
-#ifdef IGRAPHICS_IMGUI
-  if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
-    return true;
-#endif
 
   if (pGraphics->mParamEditWnd && pGraphics->mParamEditMsg == kEditing)
   {
