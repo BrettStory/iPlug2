@@ -89,8 +89,8 @@
     <ClCompile Include="..\..\..\IPlug\IPlugPaths.cpp">
       <Filter>IPlug</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\IGraphics\Drawing\IGraphicsImGui.cpp">
-      <Filter>IGraphics\Drawing</Filter>
+    <ClCompile Include="..\..\..\IGraphics\IGraphicsImGui.cpp">
+      <Filter>IGraphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,8 +279,8 @@
     <ClInclude Include="..\..\..\IPlug\IPlugPaths.h">
       <Filter>IPlug</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\IGraphics\Drawing\IGraphicsImGui.h">
-      <Filter>IGraphics\Drawing</Filter>
+    <ClInclude Include="..\..\..\IGraphics\IGraphicsImGui.h">
+      <Filter>IGraphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
