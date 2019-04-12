@@ -17,9 +17,6 @@
     <ClCompile Include="..\..\..\IPlug\IPlugAPIBase.cpp">
       <Filter>IPlug</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\IGraphics\IGraphicsEditorDelegate.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\IPlug\IPlugParameter.cpp">
       <Filter>IPlug</Filter>
     </ClCompile>
@@ -125,6 +122,10 @@
     <ClCompile Include="..\..\..\IPlug\VST3\IPlugVST3_ProcessorBase.cpp">
       <Filter>IPlug\VST3</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\commoniids.cpp" />
+    <ClCompile Include="..\..\..\IGraphics\IGraphicsEditorDelegate.cpp">
+      <Filter>IGraphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../config.h" />
@@ -226,9 +227,6 @@
       <Filter>IPlug</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\IPlug\IPlugEditorDelegate.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\IPlug\IGraphicsEditorDelegate.h">
       <Filter>IPlug</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\IPlug\IPlugLogger.h">
@@ -359,6 +357,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\IPlug\VST3\IPlugVST3_View.h">
       <Filter>IPlug\VST3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\IPlug\IGraphicsEditorDelegate.h">
+      <Filter>IGraphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
