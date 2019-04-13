@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$class_i_graphics_mac_1_1_mac_font.html" title="IGraphicsMac::MacFont" alt="" coords="155,5,317,32"/>
+<area shape="rect" id="node3" href="$class_i_graphics_web_1_1_web_font.html" title="IGraphicsWeb::WebFont" alt="" coords="153,56,319,83"/>
+<area shape="rect" id="node5" href="$class_i_graphics_win_1_1_win_font.html" title="IGraphicsWin::WinFont" alt="" coords="157,107,315,133"/>
+<area shape="rect" id="node4" href="$class_i_graphics_web_1_1_web_file_font.html" title="IGraphicsWeb::WebFileFont" alt="" coords="368,56,555,83"/>
+</map>
